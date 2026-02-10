@@ -1,0 +1,45 @@
+<div class="layout-wrapper" [class.sidebar-open]="isSidebarOpen">
+  <header class="header">
+    <div class="header-left">
+      <button mat-icon-button class="mobile-toggle" (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <a routerLink="/dashboard" class="logo">Multi Tenant Portal</a>
+      <nav class="nav-links">
+        <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+        <a routerLink="/customers" routerLinkActive="active">Customers</a>
+        <a routerLink="/users" routerLinkActive="active">Users</a>
+      </nav>
+    </div>
+    <div class="header-right">
+      <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="content-area">
+    <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeSidebar()">
+          <mat-icon>dashboard</mat-icon>
+          <span>Dashboard</span>
+        </a>
+        <a routerLink="/customers" routerLinkActive="active" (click)="closeSidebar()">
+          <mat-icon>people</mat-icon>
+          <span>Customers</span>
+        </a>
+        <a routerLink="/users" routerLinkActive="active" (click)="closeSidebar()">
+          <mat-icon>person</mat-icon>
+          <span>Users</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <span>&copy; {{ currentYear }} Multi Tenant Portal. All rights reserved.</span>
+  </footer>
+</div>

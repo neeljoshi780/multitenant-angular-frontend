@@ -1,0 +1,46 @@
+<div class="form-container">
+  <h2 class="form-title">{{ isEditMode ? 'Update User' : 'Create User' }}</h2>
+  <div *ngIf="serverMessage" class="server-error-banner">{{ serverMessage }}</div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" maxlength="150" />
+          <mat-error *ngIf="userForm.get('email')?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="userForm.get('email')?.hasError('pattern')">Enter valid email</mat-error>
+          <mat-error *ngIf="userForm.get('email')?.hasError('serverError')">{{ userForm.get('email')?.getError('serverError') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" maxlength="50" />
+          <mat-error *ngIf="userForm.get('username')?.hasError('required')">Username is required</mat-error>
+          <mat-error *ngIf="userForm.get('username')?.hasError('minlength')">Username must be at least 2 characters</mat-error>
+          <mat-error *ngIf="userForm.get('username')?.hasError('serverError')">{{ userForm.get('username')?.getError('serverError') }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row" *ngIf="!isEditMode">
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" maxlength="50" [type]="hidePassword ? 'password' : 'text'" />
+            <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          <mat-error *ngIf="userForm.get('password')?.hasError('required')">Password is required</mat-error>
+          <mat-error *ngIf="userForm.get('password')?.hasError('minlength')">Minimum 8 characters required</mat-error>
+          <mat-error *ngIf="userForm.get('password')?.hasError('serverError')">{{ userForm.get('password')?.getError('serverError') }}</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" mat-raised-button color="primary" [disabled]="userForm.invalid">
+        {{ isEditMode ? 'Update User' : 'Create User' }}
+      </button>
+      <button type="button" mat-raised-button routerLink="/users">Cancel</button>
+    </div>
+  </form>
+</div>
