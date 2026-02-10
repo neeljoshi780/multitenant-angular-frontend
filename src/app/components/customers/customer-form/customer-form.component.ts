@@ -67,10 +67,10 @@ export class CustomerFormComponent implements OnInit {
       gender: ['', Validators.required],
       address1: ['', [
         Validators.required,
-        Validators.pattern(/^[A-Za-z0-9,.\-/#\s\r\n]+$/)
+        Validators.pattern(/^[A-Za-z0-9,.\-/#@\s\r\n]+$/)
       ]],
       address2: ['', [
-        Validators.pattern(/^[A-Za-z0-9,.\-/#\s\r\n]+$/)
+        Validators.pattern(/^[A-Za-z0-9,.\-/#@\s\r\n]+$/)
       ]]
     });
   }

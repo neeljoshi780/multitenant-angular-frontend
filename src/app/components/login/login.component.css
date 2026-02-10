@@ -2,8 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding: 20px;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .login-box {
@@ -95,6 +96,7 @@ mat-form-field {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -104,6 +106,7 @@ mat-form-field {
 @media (max-width: 900px) {
   .login-box {
     flex-direction: column;
+    margin: 20px;
   }
 
   .login-left,
@@ -113,10 +116,44 @@ mat-form-field {
 
   .login-left {
     text-align: center;
-    padding: 35px;
+    padding: 30px;
   }
 
   .login-right {
     padding: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 15px;
+  }
+
+  .login-box {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .login-left {
+    padding: 25px 20px;
+  }
+
+  .login-left h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .login-right {
+    padding: 25px 20px;
+  }
+
+  .login-right h2 {
+    font-size: 20px;
+  }
+
+  .login-btn {
+    height: 45px;
+    font-size: 14px;
   }
 }
