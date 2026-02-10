@@ -1,0 +1,78 @@
+<div class="main-container">
+  <div class="register-box">
+    <div class="register-left">
+      <h1>Create Tenant Account</h1>
+      <p>Register your company and create administrator access.</p>
+    </div>
+    <div class="register-right">
+      <h2 *ngIf="step === 1">Company Information</h2>
+      <h2 *ngIf="step === 2">Administrator Details</h2>
+      <div *ngIf="serverMessage" class="server-error-banner">{{ serverMessage }}</div>
+      <form [formGroup]="signupForm">
+        <div *ngIf="step === 1">
+          <mat-form-field appearance="outline">
+            <mat-label>Company Code</mat-label>
+            <input matInput formControlName="companyCode" maxlength="50" />
+            <mat-error *ngIf="signupForm.get('companyCode')?.hasError('required')">Company code is required</mat-error>
+            <mat-error *ngIf="signupForm.get('companyCode')?.hasError('minlength')">Company code must be at least 2 characters</mat-error>
+            <mat-error *ngIf="signupForm.get('companyCode')?.hasError('serverError')">{{ signupForm.get('companyCode')?.getError('serverError') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Company Name</mat-label>
+            <input matInput formControlName="companyName" maxlength="150" />
+            <mat-error *ngIf="signupForm.get('companyName')?.hasError('required')">Company name is required</mat-error>
+            <mat-error *ngIf="signupForm.get('companyName')?.hasError('minlength')">Company name must be at least 2 characters</mat-error>
+            <mat-error *ngIf="signupForm.get('companyName')?.hasError('serverError')">{{ signupForm.get('companyName')?.getError('serverError') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Company Email</mat-label>
+            <input matInput formControlName="companyEmail" maxlength="150" />
+            <mat-error *ngIf="signupForm.get('companyEmail')?.hasError('required')">Company email is required</mat-error>
+            <mat-error *ngIf="signupForm.get('companyEmail')?.hasError('pattern')">Enter a valid email address</mat-error>
+            <mat-error *ngIf="signupForm.get('companyEmail')?.hasError('serverError')">{{ signupForm.get('companyEmail')?.getError('serverError') }}</mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary" class="action-btn" type="button" (click)="nextStep()"
+            [disabled]="!step1Valid">
+            Next
+          </button>
+        </div>
+        <div *ngIf="step === 2">
+          <mat-form-field appearance="outline">
+            <mat-label>Admin Username</mat-label>
+            <input matInput formControlName="adminUsername" maxlength="50" />
+            <mat-error *ngIf="signupForm.get('adminUsername')?.hasError('required')">Admin username is required</mat-error>
+            <mat-error *ngIf="signupForm.get('adminUsername')?.hasError('minlength')">Admin username must be at least 2 characters</mat-error>
+            <mat-error *ngIf="signupForm.get('adminUsername')?.hasError('serverError')">{{ signupForm.get('adminUsername')?.getError('serverError') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Admin Email</mat-label>
+            <input matInput formControlName="adminEmail" maxlength="150" />
+            <mat-error *ngIf="signupForm.get('adminEmail')?.hasError('required')">Admin email is required</mat-error>
+            <mat-error *ngIf="signupForm.get('adminEmail')?.hasError('pattern')">Enter valid email address</mat-error>
+            <mat-error *ngIf="signupForm.get('adminEmail')?.hasError('serverError')">{{ signupForm.get('adminEmail')?.getError('serverError') }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="adminPassword" maxlength="50" [type]="hidePassword ? 'password' : 'text'" />
+            <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="signupForm.get('adminPassword')?.hasError('required')">Password is required</mat-error>
+            <mat-error *ngIf="signupForm.get('adminPassword')?.hasError('minlength')">Minimum 8 characters required</mat-error>
+            <mat-error *ngIf="signupForm.get('adminPassword')?.hasError('serverError')">{{ signupForm.get('adminPassword')?.getError('serverError') }}</mat-error>
+          </mat-form-field>
+          <div class="btn-row">
+            <button mat-stroked-button type="button" (click)="previousStep()">Back</button>
+            <button mat-raised-button color="primary" type="button" (click)="submitSignup()" [disabled]="!step2Valid">
+              Create Account
+            </button>
+          </div>
+          <p class="login-link">Already have an account? <a routerLink="/login">Login</a></p>
+        </div>
+        <div *ngIf="step === 1" class="login-link-container-step-1" style="margin-top: 20px; text-align: center;">
+          <p class="login-link">Already have an account? <a routerLink="/login">Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
