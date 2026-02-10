@@ -2,8 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding: 20px;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .register-box {
@@ -92,10 +93,63 @@ mat-form-field {
 @media (max-width: 900px) {
   .register-box {
     flex-direction: column;
+    margin: 20px;
   }
 
   .register-left,
   .register-right {
     width: 100%;
+  }
+
+  .register-left {
+    padding: 30px;
+    text-align: center;
+  }
+
+  .register-right {
+    padding: 30px;
+  }
+
+  .btn-row {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 15px;
+  }
+
+  .register-box {
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .register-left {
+    padding: 25px 20px;
+  }
+
+  .register-left h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .register-right {
+    padding: 25px 20px;
+  }
+
+  .register-right h2 {
+    font-size: 20px;
+  }
+
+  .btn-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-row button {
+    width: 100%;
+    margin: 0;
   }
 }
